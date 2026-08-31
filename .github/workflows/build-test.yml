@@ -28,10 +28,10 @@ on:
         type: boolean
         default: 'true'
       kpm_enable:
-        description: '是否开启kpm(builtin-使用(re)sukisu内置kpm, kpn-使用独立kpm实现(支持任意KSU/面具环境); 不需要可保持默认关闭)'
+        description: '是否开启kpm(builtin-使用(re)sukisu内置kpm, kpn-使用独立kpm实现(支持任意KSU/面具环境), 全机型兼容; 不需要可关闭)'
         required: true
         type: choice
-        default: 'false'
+        default: 'kpn'
         options:
           - 'false'
           - 'builtin'
@@ -56,10 +56,10 @@ on:
           - 'true'
           - 'default'
       better_net:
-        description: '是否开启网络功能拓展配置(用于为ipset及需要iptables等高级网络功能内核支持的程序提供支持)'
+        description: '是否开启网络功能拓展配置(为ipset及需要iptables等高级网络功能内核支持的程序提供支持, 全机型兼容)'
         required: true
         type: boolean
-        default: 'false'
+        default: 'true'
       adios_enable:
         description: '是否启用ADIOS IO调度器支持(提升IO读写性能)'
         required: true
@@ -71,10 +71,10 @@ on:
         type: boolean
         default: 'false'
       baseband_guard:
-        description: '是否开启内核级基带保护(阻止一切对非用户分区的写入，有效防止格机)'
+        description: '是否开启内核级基带保护(防格机, 阻止一切对非用户分区的写入, 开启后部分刷机操作可能受限, 故默认关闭)'
         required: true
         type: boolean
-        default: 'true'
+        default: 'false'
       kernel_suffix:
         description: '内核后缀(留空默认,开头别加连字符,勿加空格等影响指令运行的保留字符)'
         required: false

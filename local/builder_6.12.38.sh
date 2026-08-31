@@ -8,31 +8,31 @@ cd "$SCRIPT_DIR"
 # ===== 设置自定义参数 =====
 echo "===== 欧加真SM8850通用6.12.38 A16 OKI内核本地编译脚本 By Coolapk@cctv18 ====="
 echo ">>> 读取用户配置..."
-MANIFEST=${MANIFEST:-oppo+oplus+realme}
+MANIFEST=${MANIFEST:-oppo+oplus+realme+oneplus+sm8845+sm8850+all6.12}
 read -p "请输入自定义内核后缀（默认：android16-5-g8c67d4274c0a-ab14275539-4k）: " CUSTOM_SUFFIX
 CUSTOM_SUFFIX=${CUSTOM_SUFFIX:-android16-5-g8c67d4274c0a-ab14275539-4k}
-read -p "是否启用susfs？(y/n，默认：y): " APPLY_SUSFS
+read -p "是否启用susfs？(y/n，默认：y - 增强隐藏挂载，兼容全机型): " APPLY_SUSFS
 APPLY_SUSFS=${APPLY_SUSFS:-y}
-read -p "是否启用 KPM？(y-启用 KpatchNext独立kpm实现, n-关闭kpm，默认：n): " USE_PATCH_LINUX
-USE_PATCH_LINUX=${USE_PATCH_LINUX:-n}
+read -p "是否启用 KPM？(y-启用 KpatchNext独立kpm实现, n-关闭kpm，默认：y - 支持任意KSU/面具环境，全机型兼容): " USE_PATCH_LINUX
+USE_PATCH_LINUX=${USE_PATCH_LINUX:-y}
 read -p "KSU分支版本(r=ReSukiSU, y=SukiSU Ultra, n=KernelSU Next, k=KSU, l=lkm模式(无内置KSU), 默认：r): " KSU_BRANCH
 KSU_BRANCH=${KSU_BRANCH:-r}
-read -p "是否应用 lz4 1.10.0 & zstd 1.5.7 补丁？(y/n，默认：y): " APPLY_LZ4
+read -p "是否应用 lz4 1.10.0 & zstd 1.5.7 补丁？(y/n，默认：y - 压缩算法优化，全机型兼容): " APPLY_LZ4
 APPLY_LZ4=${APPLY_LZ4:-y}
-read -p "是否应用 lz4kd 补丁？(y/n，默认：n): " APPLY_LZ4KD
+read -p "是否应用 lz4kd 补丁？(y/n，默认：n - 若已开启lz4+zstd则可不开启): " APPLY_LZ4KD
 APPLY_LZ4KD=${APPLY_LZ4KD:-n}
-read -p "是否启用网络功能增强优化配置？(y/n，默认：y): " APPLY_BETTERNET
+read -p "是否启用网络功能增强优化配置？(y/n，默认：y - 提供ipset/iptables高级网络支持，全机型兼容): " APPLY_BETTERNET
 APPLY_BETTERNET=${APPLY_BETTERNET:-y}
-read -p "是否添加 BBR 等一系列拥塞控制算法？(y添加/n禁用/d默认，默认：n): " APPLY_BBR
+read -p "是否添加 BBR 等一系列拥塞控制算法？(y添加/n禁用/d默认，默认：n - 手机日用可能负优化，按需开启): " APPLY_BBR
 APPLY_BBR=${APPLY_BBR:-n}
-read -p "是否添加 Droidspaces 容器支持？(n禁用/s标准/e扩展，默认：n): " APPLY_DROIDSPACES
+read -p "是否添加 Droidspaces 容器支持？(n禁用/s标准/e扩展，默认：n - 轻量化Linux容器支持，按需开启): " APPLY_DROIDSPACES
 APPLY_DROIDSPACES=${APPLY_DROIDSPACES:-n}
-read -p "是否启用ADIOS调度器？(y/n，默认：y): " APPLY_ADIOS
+read -p "是否启用ADIOS调度器？(y/n，默认：y - 提升IO读写性能，全机型兼容): " APPLY_ADIOS
 APPLY_ADIOS=${APPLY_ADIOS:-y}
-read -p "是否启用Re-Kernel？(y/n，默认：n): " APPLY_REKERNEL
+read -p "是否启用Re-Kernel？(y/n，默认：n - 配合Freezer/NoActive降功耗，部分机型可能不兼容): " APPLY_REKERNEL
 APPLY_REKERNEL=${APPLY_REKERNEL:-n}
-read -p "是否启用内核级基带保护？(y/n，默认：y): " APPLY_BBG
-APPLY_BBG=${APPLY_BBG:-y}
+read -p "是否启用内核级基带保护（防格机）？(y/n，默认：n - 阻止对非用户分区写入，开启后部分刷机操作可能受限): " APPLY_BBG
+APPLY_BBG=${APPLY_BBG:-n}
 
 if [[ "$KSU_BRANCH" == "y" || "$KSU_BRANCH" == "Y" ]]; then
   KSU_TYPE="SukiSU Ultra"

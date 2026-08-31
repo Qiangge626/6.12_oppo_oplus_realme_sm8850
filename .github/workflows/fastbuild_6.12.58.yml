@@ -28,10 +28,10 @@ on:
         type: boolean
         default: 'true'
       kpm_enable:
-        description: '是否开启kpm(使用KpatchNext独立实现kpm(支持任意KSU/面具环境); 不需要可保持默认关闭)'
+        description: '是否开启kpm(使用KpatchNext独立实现kpm(支持任意KSU/面具环境), 全机型兼容; 不需要可关闭)'
         required: true
         type: boolean
-        default: 'false'
+        default: 'true'
       lz4_enable:
         description: '是否安装 lz4 1.10.0+zstd 1.5.7 补丁'
         required: true
@@ -61,10 +61,10 @@ on:
           - 'standard'
           - 'extend'
       better_net:
-        description: '是否开启网络功能拓展配置(用于为ipset及需要iptables等高级网络功能内核支持的程序提供支持)'
+        description: '是否开启网络功能拓展配置(为ipset及需要iptables等高级网络功能内核支持的程序提供支持, 全机型兼容)'
         required: true
         type: boolean
-        default: 'false'
+        default: 'true'
       adios_enable:
         description: '是否启用ADIOS IO调度器支持(提升IO读写性能)'
         required: true
@@ -76,10 +76,10 @@ on:
         type: boolean
         default: 'false'
       baseband_guard:
-        description: '是否开启内核级基带保护(阻止一切对非用户分区的写入，有效防止格机)'
+        description: '是否开启内核级基带保护(防格机, 阻止一切对非用户分区的写入, 开启后部分刷机操作可能受限, 故默认关闭)'
         required: true
         type: boolean
-        default: 'true'
+        default: 'false'
       ccache_update:
         description: '更新ccache缓存(将本次编译生成的ccache缓存覆盖至仓库缓存，在更改编译配置、源码或需要刷新缓存时开启)'
         required: true
